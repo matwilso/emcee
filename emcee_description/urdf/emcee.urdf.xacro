@@ -19,7 +19,7 @@
   <xacro:property name="chassis_width" value="0.4731"/>
   <xacro:property name="chassis_length" value="0.627"/>
 
-  <xacro:property name="sled_hoz_width" value="0.44.2"/>
+  <xacro:property name="sled_hoz_width" value="0.442"/>
   <xacro:property name="sled_hoz_length" value="0.245"/>
   <xacro:property name="sled_hoz_height" value="0.0405"/>
 
@@ -150,7 +150,7 @@
         <box size="${sled_hoz_width} ${sled_hoz_length} ${sled_hoz_height}"/>
       </geometry>
       <origin xyz="0 0 0" rpy="0 0 0"/>
-      <material name="green"/>
+      <material name="light_grey"/>
     </visual>
     <collision>
       <origin xyz="0 0 0"/>
@@ -171,8 +171,8 @@
     <axis rpy="0 0 0" xyz="1 0 0"/>
     <!-- <dynamics damping="0.1" friction="0"/> -->
     <dynamics damping="100" friction="1"/>
-    <limit effort="1000" lower="${-(chassis_length/2)-0.0508+(sled_hoz_width/2)}" upper="${(chassis_length/2)-0.0508-(sled_hoz_width/2)}" velocity="0.1"/>
-    <origin rpy="0 0 0" xyz="0 0 ${(chassis_height/2)+0.04}"/>
+    <limit effort="1000" lower="${-(chassis_length/2)+(sled_hoz_width/2)}" upper="${(chassis_length/2)-(sled_hoz_width/2)}" velocity="0.1"/> 
+    <origin rpy="0 0 0" xyz="0 0 ${(chassis_height/2)}"/>
   </joint>
 
 
@@ -182,7 +182,7 @@
         <box size="${sled_ver_width} ${sled_ver_length} ${sled_ver_height}"/>
       </geometry>
       <origin xyz="0 0 0" rpy="0 0 0"/>
-      <material name="green"/>
+      <material name="light_grey"/>
     </visual>
     <collision>
       <origin xyz="0 0 0"/>
@@ -226,7 +226,7 @@
   <joint name="arm_joint" type="revolute">
     <parent link="sled_ver"/>
     <child link="arm_s"/>
-    <origin xyz="-0.236 0 ${arm_block_height + 0.0255}"/>
+    <origin xyz="0 0 0"/>
     <axis xyz="0 1 0"/>
     <limit lower="-0.253177" upper="0.30918" effort="1000000" velocity="0.1"/>
     <dynamics damping="0.1" friction="0"/>
