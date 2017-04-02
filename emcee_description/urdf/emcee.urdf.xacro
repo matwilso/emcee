@@ -207,13 +207,13 @@
     <visual>
      <origin xyz="0 0 0"/>
       <geometry>
-        <box size="${arm_s_width} ${arm_s_height} ${arm_s_height}"/>
+        <box size="${arm_s_length} ${arm_s_width} ${arm_s_height}"/>
       </geometry>
     </visual>
     <collision>
       <origin xyz="0.01 -.01 .02"/>
       <geometry>
-        <box size="${arm_s_width} ${arm_s_height} ${arm_s_height}"/>
+        <box size="${arm_s_length} ${arm_s_width} ${arm_s_height}"/>
       </geometry>
     </collision>
     <inertial>
@@ -237,13 +237,13 @@
     <visual>
      <origin xyz="0 0 0"/>
       <geometry>
-        <box size="${arm_b_width} ${arm_b_height} ${arm_b_height}"/>
+        <box size="${arm_b_length} ${arm_b_width} ${arm_b_height}"/>
       </geometry>
     </visual>
     <collision>
       <origin xyz="0.01 -.01 .02"/>
       <geometry>
-        <box size="${arm_b_width} ${arm_b_height} ${arm_b_height}"/>
+        <box size="${arm_b_length} ${arm_b_width} ${arm_b_height}"/>
       </geometry>
     </collision>
     <inertial>
