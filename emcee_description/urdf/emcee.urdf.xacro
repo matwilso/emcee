@@ -147,7 +147,7 @@
   <link name="sled_hoz">
     <visual>
       <geometry>
-        <box size="${sled_hoz_width} ${sled_hoz_length} ${sled_hoz_height}"/>
+        <box size="${sled_hoz_length} ${sled_hoz_width} ${sled_hoz_height}"/>
       </geometry>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <material name="light_grey"/>
@@ -155,7 +155,7 @@
     <collision>
       <origin xyz="0 0 0"/>
       <geometry>
-        <box size="${sled_hoz_width} ${sled_hoz_length} ${sled_hoz_height}"/>
+        <box size="${sled_hoz_length} ${sled_hoz_width} ${sled_hoz_height}"/>
       </geometry>
     </collision>
     <inertial>
@@ -171,7 +171,7 @@
     <axis rpy="0 0 0" xyz="1 0 0"/>
     <!-- <dynamics damping="0.1" friction="0"/> -->
     <dynamics damping="100" friction="1"/>
-    <limit effort="1000" lower="${-(chassis_length/2)+(sled_hoz_width/2)}" upper="${(chassis_length/2)-(sled_hoz_width/2)}" velocity="0.1"/> 
+    <limit effort="1000" lower="${-(chassis_length/2)+(sled_hoz_width/2)}" upper="${(chassis_length/2)-(sled_hoz_width/2)}" velocity="0.1"/>
     <origin rpy="0 0 0" xyz="0 0 ${(chassis_height/2)}"/>
   </joint>
 
@@ -179,7 +179,7 @@
   <link name="sled_ver">
     <visual>
       <geometry>
-        <box size="${sled_ver_width} ${sled_ver_length} ${sled_ver_height}"/>
+        <box size="${sled_ver_length} ${sled_ver_width} ${sled_ver_height}"/>
       </geometry>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <material name="light_grey"/>
@@ -187,7 +187,7 @@
     <collision>
       <origin xyz="0 0 0"/>
       <geometry>
-        <box size="${sled_ver_width} ${sled_ver_length} ${sled_ver_height}"/>
+        <box size="${sled_ver_length} ${sled_ver_width} ${sled_ver_height}"/>
       </geometry>
     </collision>
     <inertial>
@@ -203,8 +203,8 @@
     <origin rpy="0 0 0" xyz="0 0 ${sled_hoz_height}"/>
   </joint>
 
-  <link name="arm_s"> 
-    <visual> 
+  <link name="arm_s">
+    <visual>
      <origin xyz="0 0 0"/>
       <geometry>
         <box size="${arm_s_width} ${arm_s_height} ${arm_s_height}"/>
@@ -233,8 +233,8 @@
   </joint>
 
 
-  <link name="arm_b"> 
-    <visual> 
+  <link name="arm_b">
+    <visual>
      <origin xyz="0 0 0"/>
       <geometry>
         <box size="${arm_b_width} ${arm_b_height} ${arm_b_height}"/>
@@ -372,4 +372,3 @@
   </transmission>
 
 </robot>
-
