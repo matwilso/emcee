@@ -33,17 +33,17 @@
 
   <xacro:property name="arm_angle" value="2.356194490192345"/> <!-- 135 degrees -->
 
-  <xacro:property name="arm_b_width" value="0.350"/>
+  <xacro:property name="arm_b_width" value="0.429"/>
   <xacro:property name="arm_b_length" value="0.440"/>
   <xacro:property name="arm_b_height" value="0.0405"/>
 
   <!-- TODO: measure these -->
-  <xacro:property name="wheel_radius" value="0.156369"/>
-  <xacro:property name="wheel_width" value="0.1905"/>
-  <xacro:property name="wheel_location_from_back" value="0.2572"/>
-  <xacro:property name="wheel_location_from_front" value="0.08255"/>
+  <xacro:property name="wheel_base" value="0.503"/>
+  <xacro:property name="wheel_track" value="0.575"/>
+  <xacro:property name="wheel_radius" value="0.14"/>
+  <xacro:property name="wheel_width" value="0.17"/>
+  <!-- not sure about this one -->
   <xacro:property name="wheel_height" value="0.047625"/>
-
 
 
   <xacro:macro name="wheel" params="prefix reflect *joint_pose">
@@ -132,16 +132,16 @@
   </link>
 
   <xacro:wheel prefix="left_front" reflect="1">
-    <origin xyz="${(chassis_length/2)-(wheel_location_from_front)} ${(chassis_width/2)+(wheel_width/2)} ${-(chassis_height/2)+wheel_height}" rpy="0 0 0"/>
+    <origin xyz="${wheel_base/2} ${wheel_track/2} 0" rpy="0 0 0"/>
   </xacro:wheel>
   <xacro:wheel prefix="left_rear" reflect="1">
-    <origin xyz="${-(chassis_length/2)+(wheel_location_from_back)} ${(chassis_width/2)+(wheel_width/2)} ${-(chassis_height/2)+wheel_height}" rpy="0 0 0"/>
+      <origin xyz="${-wheel_base/2} ${wheel_track/2} 0" rpy="0 0 0"/>
   </xacro:wheel>
   <xacro:wheel prefix="right_front" reflect="-1">
-    <origin xyz="${(chassis_length/2)-(wheel_location_from_front)} ${-(chassis_width/2)-(wheel_width/2)} ${-(chassis_height/2)+wheel_height}" rpy="${PI} 0 0"/>
+      <origin xyz="${wheel_base/2} ${-wheel_track/2} 0" rpy="0 0 0"/>
   </xacro:wheel>
   <xacro:wheel prefix="right_rear" reflect="-1">
-    <origin xyz="${-(chassis_length/2)+(wheel_location_from_back)} ${-(chassis_width/2)-(wheel_width/2)} ${-(chassis_height/2)+wheel_height}" rpy="${PI} 0 0"/>
+    <origin xyz="${-wheel_base/2} ${-wheel_track/2} 0" rpy="${PI} 0 0"/>
   </xacro:wheel>
 
   <link name="sled_hoz">
@@ -171,8 +171,8 @@
     <axis rpy="0 0 0" xyz="1 0 0"/>
     <!-- <dynamics damping="0.1" friction="0"/> -->
     <dynamics damping="100" friction="1"/>
-    <limit effort="1000" lower="${-(chassis_length/2)+(sled_hoz_width/2)}" upper="${(chassis_length/2)-(sled_hoz_width/2)}" velocity="0.1"/>
-    <origin rpy="0 0 0" xyz="0 0 ${(chassis_height/2)}"/>
+    <limit effort="1000" lower="${-(chassis_length/2)+(sled_hoz_length/2)}" upper="${(chassis_length/2)-(sled_hoz_length/2)}" velocity="0.1"/>
+    <origin rpy="0 0 0" xyz="0 0 ${chassis_height/2 + sled_hoz_height/2}"/>
   </joint>
 
 
@@ -197,21 +197,21 @@
     </inertial>
   </link>
 
-  <joint name="sled_bend_joint" type="fixed">
+  <joint name="sled_ver_joint" type="fixed">
     <parent link="sled_hoz"/>
     <child link="sled_ver"/>
-    <origin rpy="0 0 0" xyz="0 0 ${sled_hoz_height}"/>
+    <origin rpy="0 0 0" xyz="${-sled_hoz_length/2 + sled_ver_length/2} 0 ${sled_ver_height/2 + sled_hoz_height/2}"/>
   </joint>
 
   <link name="arm_s">
     <visual>
-     <origin xyz="0 0 0"/>
+     <origin xyz="${arm_s_length/2 - sled_ver_length/2} 0 0"/>
       <geometry>
         <box size="${arm_s_length} ${arm_s_width} ${arm_s_height}"/>
       </geometry>
     </visual>
     <collision>
-      <origin xyz="0.01 -.01 .02"/>
+      <origin xyz="${arm_s_length/2 - sled_ver_length/2} 0 0"/>
       <geometry>
         <box size="${arm_s_length} ${arm_s_width} ${arm_s_height}"/>
       </geometry>
@@ -223,15 +223,14 @@
     </inertial>
   </link>
 
-  <joint name="arm_joint" type="revolute">
+  <joint name="arm_s_joint" type="revolute">
     <parent link="sled_ver"/>
     <child link="arm_s"/>
-    <origin xyz="0 0 0"/>
+    <origin xyz="0 0 ${sled_ver_height/2}"/>
     <axis xyz="0 1 0"/>
     <limit lower="-0.253177" upper="0.30918" effort="1000000" velocity="0.1"/>
     <dynamics damping="0.1" friction="0"/>
   </joint>
-
 
   <link name="arm_b">
     <visual>
@@ -241,7 +240,7 @@
       </geometry>
     </visual>
     <collision>
-      <origin xyz="0.01 -.01 .02"/>
+      <origin xyz="0 0 0"/>
       <geometry>
         <box size="${arm_b_length} ${arm_b_width} ${arm_b_height}"/>
       </geometry>
@@ -256,7 +255,7 @@
   <joint name="arm_bend_joint" type="fixed">
     <parent link="arm_s"/>
     <child link="arm_b"/>
-    <origin xyz="0 0 0"/>
+    <origin xyz="${arm_s_length/2 + arm_b_length/sqrt(2) + sled_ver_length} 0 ${-arm_b_length/sqrt(2)/2}" rpy="0 ${PI - arm_angle} 0"/>
   </joint>
 
 <link name="bucket">
@@ -276,7 +275,7 @@
     <inertial>
       <!-- xyz="-0.304153 0.030822 -0.01735" -->
       <!-- <origin xyz="0.1 0 0.05" rpy="0 0 0"/> -->
-      <origin xyz="0.124844 -0.000416 0.002654" rpy="0 ${PI/7} 0"/>
+      <origin xyz="0 0 0" rpy="0 ${PI/7} 0"/>
       <!-- <mass value="1"/> -->
       <mass value="3.92566"/>
       <inertia ixx="0.216901" ixy="0" ixz="-0.007835" iyy="0.042509" iyz="0" izz="0.243738"/>
@@ -287,7 +286,8 @@
     <parent link="arm_b"/>
     <child link="bucket"/>
     <axis xyz="0 1 0"/>
-    <origin xyz=".965 0 -0.282"/>
+    <!-- <origin xyz="${arm_b_length/sqrt(2)} 0 ${-arm_b_length/sqrt(2)}"/> -->
+    <origin xyz="${arm_b_length/sqrt(2)} 0 0"/>
     <limit lower="${-0.40}" upper="${3.14159/2}" effort="100000" velocity="1"/>
     <dynamics damping="0.1" friction="0"/>
   </joint>
@@ -316,12 +316,6 @@
     <origin rpy="0 0 0" xyz="0.015 0 .07"/>
   </joint>
 
-  <!-- TODO: This is the note from the copy and paste:
-
-       Make this internal_imu_link or something, and use a mixed-in xacro
-       to supply the joint between it and imu_link. This is important so that imu_link
-       always points to the "active" IMU. When an upgrade IMU is connected, the
-       internal_imu_link should remain, but imu_link should point to the upgrade one. -->
   <link name="imu_link">
     <inertial>
       <mass value="0.001"/>
@@ -334,7 +328,7 @@
     <child link="imu_link"/>
   </joint>
 
-  <!-- Bring in simulation data for Gazebo. -->
+  <!-- Bring in simulation configuration for Gazebo. -->
   <xacro:include filename="emcee.gazebo"/>
 
 
