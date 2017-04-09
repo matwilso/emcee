@@ -138,7 +138,7 @@
       <origin xyz="${-wheel_base/2} ${wheel_track/2} 0" rpy="0 0 0"/>
   </xacro:wheel>
   <xacro:wheel prefix="right_front" reflect="-1">
-      <origin xyz="${wheel_base/2} ${-wheel_track/2} 0" rpy="0 0 0"/>
+      <origin xyz="${wheel_base/2} ${-wheel_track/2} 0" rpy="${PI} 0 0"/>
   </xacro:wheel>
   <xacro:wheel prefix="right_rear" reflect="-1">
     <origin xyz="${-wheel_base/2} ${-wheel_track/2} 0" rpy="${PI} 0 0"/>
@@ -175,7 +175,6 @@
     <origin rpy="0 0 0" xyz="0 0 ${chassis_height/2 + sled_hoz_height/2}"/>
   </joint>
 
-
   <link name="sled_ver">
     <visual>
       <geometry>
@@ -209,12 +208,14 @@
       <geometry>
         <box size="${arm_s_length} ${arm_s_width} ${arm_s_height}"/>
       </geometry>
+      <material name="red"/>
     </visual>
     <collision>
       <origin xyz="${arm_s_length/2 - sled_ver_length/2} 0 0"/>
       <geometry>
         <box size="${arm_s_length} ${arm_s_width} ${arm_s_height}"/>
       </geometry>
+      <material name="red"/>
     </collision>
     <inertial>
       <origin xyz="0.439315 0.004673 -0.035609" rpy="0 0 0"/>
@@ -238,12 +239,14 @@
       <geometry>
         <box size="${arm_b_length} ${arm_b_width} ${arm_b_height}"/>
       </geometry>
+      <material name="red"/>
     </visual>
     <collision>
       <origin xyz="0 0 0"/>
       <geometry>
         <box size="${arm_b_length} ${arm_b_width} ${arm_b_height}"/>
       </geometry>
+      <material name="red"/>
     </collision>
     <inertial>
       <origin xyz="0.439315 0.004673 -0.035609" rpy="0 0 0"/>
@@ -345,7 +348,7 @@
 
   <transmission name="arm_trans">
     <type>transmission_interface/SimpleTransmission</type>
-    <joint name="arm_joint">
+    <joint name="arm_s_joint">
       <hardwareInterface>EffortJointInterface</hardwareInterface>
     </joint>
     <actuator name="arm_linear_actuators">

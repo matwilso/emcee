@@ -82,9 +82,6 @@
     <max_vel>0.01</max_vel>
   </gazebo>
 
-
-
-
   <!-- camera -->
   <!-- TODO: try to get the openni plugin working. This is currently a standard camera. -->
 <!--  <gazebo reference="ir_camera">
