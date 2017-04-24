@@ -12,10 +12,10 @@ emcee_joint_state_controller:
 emcee_sled_position_controller:
   type: effort_controllers/JointPositionController
   pid: {p: 32000.0, i: 10.0, d: 700.0}
-  joint: sled_hoz_joint
+  joint: sled_joint
 emcee_arm_position_controller:
   type: effort_controllers/JointPositionController
-  joint: arm_s_joint
+  joint: arm_joint
   pid: {p: 16000.0, i: 20.0, d: 80.0}
 emcee_bucket_position_controller:
   type: effort_controllers/JointPositionController

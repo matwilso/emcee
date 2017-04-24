@@ -74,14 +74,14 @@ JoyTeleop::JoyTeleop() {
     sled_max_vel = 0.0008;
 
     // positions
-    arm_min = -0.253177;
-    arm_max = 0.309183;
+    arm_min = -0.8;
+    arm_max = 0.31;
 
-    bucket_min = -0.4;
-    bucket_max = 1.570795;
+    bucket_min = -1.5;
+    bucket_max = 0.7;
 
-    sled_min = -0.204975;
-    sled_max = 0.103375;
+    sled_min = -0.191;
+    sled_max = 0.191;
 
     //get parameters from the Parameter Server.
     //These are loaded from the emcee_control.yaml by the control.launch file.

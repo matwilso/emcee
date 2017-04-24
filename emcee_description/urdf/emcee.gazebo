@@ -42,17 +42,20 @@
     <mu1>0.2</mu1>
     <mu2>0.2</mu2>
     <max_vel>0.01</max_vel>
+    <material>Gazebo/Grey</material>
   </gazebo>
   <gazebo reference="sled_hoz">
     <mu1>0.2</mu1>
     <mu2>0.2</mu2>
     <max_vel>0.01</max_vel>
     <implicitSpringDamper>1</implicitSpringDamper>
+    <material>Gazebo/Grey</material>
   </gazebo>
   <gazebo reference="sled_ver">
     <mu1>0.2</mu1>
     <mu2>0.2</mu2>
     <max_vel>0.01</max_vel>
+    <material>Gazebo/Grey</material>
     <implicitSpringDamper>1</implicitSpringDamper>
   </gazebo>
   <gazebo reference="bucket">
@@ -60,21 +63,26 @@
     <mu2>0.2</mu2>
     <max_vel>0.01</max_vel>
     <implicitSpringDamper>1</implicitSpringDamper>
+    <material>Gazebo/Grey</material>
   </gazebo>
-  <gazebo reference="arm_s">
+  <gazebo reference="arm_upper">
     <mu1>0.2</mu1>
     <mu2>0.2</mu2>
-    <implicitSpringDamper>1</implicitSpringDamper>
     <max_vel>0.01</max_vel>
+    <material>Gazebo/Grey</material>
+    <implicitSpringDamper>1</implicitSpringDamper>
   </gazebo>
-  <gazebo reference="arm_b">
+  <gazebo reference="arm_lower">
     <mu1>0.2</mu1>
     <mu2>0.2</mu2>
-    <implicitSpringDamper>1</implicitSpringDamper>
     <max_vel>0.01</max_vel>
+    <implicitSpringDamper>1</implicitSpringDamper>
+    <material>
+       <script>Gazebo/Grey</script>
+   </material>
   </gazebo>
   <gazebo reference="zed_link">
-    <material>Gazebo/Grey</material>
+    <material>Gazebo/Blue</material>
     <max_vel>0.01</max_vel>
   </gazebo>
   <gazebo reference="imu_link">
